@@ -1,5 +1,6 @@
 import express from 'express';
 import cors  from "cors";
+import mongoose from 'mongoose';
 
 const app = express();
 
@@ -18,6 +19,16 @@ app.use(function (req, res, next) {
     next();
     
 });
+
+/*connection a ma base de donnee*/ 
+//
+mongoose.connect("mongodb+srv://OunissaAmri:Ounissa1992*@ounissa.8wenniv.mongodb.net/",{useNewUrlParser: true, useUnifiedTopology: true
+}).then(()=>{
+    console.log("CONNECTION  reussi a mongoDB");
+}).catch((erreur)=>console.log("Echec de connection a mongoBD",erreur));
+// .catch pour recuperer l'erreur
+
+
 // API 
 app.get("/", (req,res) => {
     res.send('Bienvenue sur le backend de Together.');
@@ -26,3 +37,10 @@ app.get("/", (req,res) => {
 app.listen(3000, () => {
   console.log(`Server is listening on port ${3000}`);
 });
+ /**la methode crud (sert a faire les roots)
+  * crud
+  * creat
+  * read
+  * update
+  * delete
+  */
