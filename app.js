@@ -21,10 +21,6 @@ app.use(function (req, res, next) {
     
 });
 
-/*connection a ma base de donnee*/ 
-// const uri = "mongodb+srv://OunissaAmri:<password>@ounissa.8wenniv.mongodb.net/?retryWrites=true&w=majority&appName=ounissa";
-
-
 mongoose.connect("mongodb+srv://OunissaAmri:Ounissa1992*@ounissa.8wenniv.mongodb.net/ressource-panel?retryWrites=true&w=majority&appName=ounissa",{useNewUrlParser: true, useUnifiedTopology: true
 }).then(()=>{
     console.log("CONNECTION  reussi a mongoDB");
@@ -44,10 +40,3 @@ app.post("/api/login", login)
 app.listen(3000, () => {
   console.log(`Server is listening on port ${3000}`);
 });
- /**la methode crud (sert a faire les roots)
-  * crud
-  * creat
-  * read
-  * update
-  * delete
-  */
