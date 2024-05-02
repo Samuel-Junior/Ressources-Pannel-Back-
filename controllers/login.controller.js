@@ -1,11 +1,10 @@
 import User from "../models/user.model.js"
 import jsonwebtoken from "jsonwebtoken"
-// instaler la commande npm install jsonwebtoken
 
 export const login = async (req , res) =>{
    
     try{
-        // requette dpour la base de donnee 
+    
        const userFromDb=  await User.findOne({email: req.body.email, password: req.body.password});
        console.log('utilisateur',userFromDb)
        //test si un user est trouver dans la base de donnee
@@ -18,8 +17,7 @@ export const login = async (req , res) =>{
        } else {
         res.status(401).json({message:"utilisateur existe pas"})
        }   
-    }
-    // si la cnx  a la Base de Donnee n'est pas reussi on affiche le msg d'erreur 
+    }    
     catch(e){
         res.status(401).json({message:"utilisateur existe pas"})
     }
@@ -27,5 +25,3 @@ export const login = async (req , res) =>{
     
 
 }
-
-
