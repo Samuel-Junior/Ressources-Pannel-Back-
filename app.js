@@ -1,6 +1,9 @@
 import express from 'express';
 import cors  from "cors";
-
+import mongoose from 'mongoose';
+import {login} from './controllers/login.controller.js';
+import bodyparser from "body-parser";
+import 'dotenv/config'
 const app = express();
 
 // Cors options 
@@ -18,11 +21,23 @@ app.use(function (req, res, next) {
     next();
     
 });
+
+mongoose.connect(`mongodb+srv://${process.env.IDENTIFIANT}:${process.env.PASSWORD}@${process.env.BASE_URL_BDD}/${process.env.DB_NAME}?retryWrites=true&w=majority&appName=ounissa`,{useNewUrlParser: true, useUnifiedTopology: true
+}).then(()=>{
+    console.log("CONNECTION  reussi a mongoDB");
+}).catch((erreur)=>console.log("Echec de connection a mongoBD",erreur));
+// .catch pour recuperer l'erreur
+
+app.use(bodyparser.json())
 // API 
 app.get("/", (req,res) => {
-    res.send('Bienvenue sur le backend de Together.');
+    res.send('Bienvenue sur le backend de ressource panel.');
 });
 
+app.post("/api/login", login)
+
+
+    
 app.listen(3000, () => {
   console.log(`Server is listening on port ${3000}`);
 });
