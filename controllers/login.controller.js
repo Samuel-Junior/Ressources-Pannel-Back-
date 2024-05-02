@@ -11,8 +11,8 @@ export const login = async (req , res) =>{
        //test si un user est trouver dans la base de donnee
        if(userFromDb){
         
-        const accessToken =jsonwebtoken.sign({user:userFromDb._id},'abcdefghijklmopqrstuvwxyz198273654',{expiresIn:"1d"});
-        const refreshToken =jsonwebtoken.sign({user:userFromDb._id},'abcdefghijklmopqrstuvwxyz198273654',{expiresIn:"7d"});
+        const accessToken =jsonwebtoken.sign({user:userFromDb._id},process.env.KEY_TOKEN,{expiresIn:"1d"});
+        const refreshToken =jsonwebtoken.sign({user:userFromDb._id},process.env.KEY_TOKEN,{expiresIn:"7d"});
         res.status(200).json({accessToken,refreshToken,message:"utilisateur existe",utilisateur:userFromDb})
         // si le user n'existe pas 
        } else {

@@ -3,6 +3,7 @@ import cors  from "cors";
 import mongoose from 'mongoose';
 import {login} from './controllers/login.controller.js';
 import bodyparser from "body-parser";
+import 'dotenv/config'
 const app = express();
 
 // Cors options 
@@ -21,7 +22,7 @@ app.use(function (req, res, next) {
     
 });
 
-mongoose.connect("mongodb+srv://OunissaAmri:Ounissa1992*@ounissa.8wenniv.mongodb.net/ressource-panel?retryWrites=true&w=majority&appName=ounissa",{useNewUrlParser: true, useUnifiedTopology: true
+mongoose.connect(`mongodb+srv://${process.env.IDENTIFIANT}:${process.env.PASSWORD}@${process.env.BASE_URL_BDD}/${process.env.DB_NAME}?retryWrites=true&w=majority&appName=ounissa`,{useNewUrlParser: true, useUnifiedTopology: true
 }).then(()=>{
     console.log("CONNECTION  reussi a mongoDB");
 }).catch((erreur)=>console.log("Echec de connection a mongoBD",erreur));
