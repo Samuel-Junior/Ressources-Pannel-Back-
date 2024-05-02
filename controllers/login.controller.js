@@ -1,5 +1,6 @@
 import User from "../models/user.model.js"
 import jsonwebtoken from "jsonwebtoken"
+// instaler la commande npm install jsonwebtoken
 
 export const login = async (req , res) =>{
    
@@ -9,7 +10,7 @@ export const login = async (req , res) =>{
        console.log('utilisateur',userFromDb)
        //test si un user est trouver dans la base de donnee
        if(userFromDb){
-        //atrebustion d'un token a  l'utulisateur
+        
         const accessToken =jsonwebtoken.sign({user:userFromDb._id},'abcdefghijklmopqrstuvwxyz198273654',{expiresIn:"1d"});
         const refreshToken =jsonwebtoken.sign({user:userFromDb._id},'abcdefghijklmopqrstuvwxyz198273654',{expiresIn:"7d"});
         res.status(200).json({accessToken,refreshToken,message:"utilisateur existe",utilisateur:userFromDb})
