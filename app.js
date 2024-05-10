@@ -2,8 +2,10 @@ import express from 'express';
 import cors  from "cors";
 import mongoose from 'mongoose';
 import {login} from './controllers/login.controller.js';
+import {createCollaborator} from './controllers/collaborator.controller.js';
 import bodyparser from "body-parser";
 import 'dotenv/config'
+
 const app = express();
 
 // Cors options 
@@ -36,6 +38,8 @@ app.get("/", (req,res) => {
 
 app.post("/api/login", login)
 
+
+app.post("/api/collaborator/create", createCollaborator)
 
     
 app.listen(3000, () => {
