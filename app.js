@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import { login } from './controllers/login.controller.js';
 import { deleteUser } from './controllers/users.controller.js';
 import { createCollaborator } from './controllers/collaborator.controller.js';
+import { updateuser} from './controllers/updateuser.controller.js';
 import bodyparser from "body-parser";
 import 'dotenv/config';
 
@@ -45,6 +46,7 @@ app.post("/api/collaborator/create", createCollaborator);
 
 //delete
 app.delete("/api/users/:id", deleteUser);
+app.put("/api/users/:id", updateuser);
 
 app.listen(3000, () => {
     console.log(`Server is listening on port ${3000}`);

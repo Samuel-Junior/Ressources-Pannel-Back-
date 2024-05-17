@@ -1,10 +1,10 @@
-import UserModel from '../models/user.model.js'; // Assurez-vous d'importer votre modèle d'utilisateur
+import UserModel from '../models/user.model.js'; 
 
 export const deleteUser = async (req, res) => {
-    const userId = req.params.id; // Récupère l'ID de l'utilisateur à supprimer depuis les paramètres de l'URL
+    const userId = req.params.id; // Récupère ID du user à supprimer depuis URL
 
     try {
-        // Recherchez l'utilisateur dans la base de données par son ID et supprimez-le
+        // Recherchez l'utilisateur dans BDD par son ID et le delete
         const deletedUser = await UserModel.findByIdAndDelete(userId);
 
         if (!deletedUser) {
