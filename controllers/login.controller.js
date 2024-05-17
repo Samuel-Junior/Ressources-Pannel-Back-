@@ -22,8 +22,4 @@ export const login = async (req , res) =>{
     catch(e){
         res.status(401).json({message:"utilisateur existe pas"})
     }
-  
-    
-    
-
 }

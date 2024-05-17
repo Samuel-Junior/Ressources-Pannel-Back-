@@ -1,10 +1,11 @@
 import express from 'express';
-import cors  from "cors";
+import cors from "cors";
 import mongoose from 'mongoose';
-import {login} from './controllers/login.controller.js';
-import {createCollaborator} from './controllers/collaborator.controller.js';
+import { login } from './controllers/login.controller.js';
+import { deleteUser } from './controllers/users.controller.js';
+import { createCollaborator } from './controllers/collaborator.controller.js';
 import bodyparser from "body-parser";
-import 'dotenv/config'
+import 'dotenv/config';
 
 const app = express();
 
@@ -21,27 +22,30 @@ app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Credentials', true);
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     next();
-    
+
 });
 
-mongoose.connect(`mongodb+srv://${process.env.IDENTIFIANT}:${process.env.PASSWORD}@${process.env.BASE_URL_BDD}/${process.env.DB_NAME}?retryWrites=true&w=majority&appName=ounissa`,{useNewUrlParser: true, useUnifiedTopology: true
-}).then(()=>{
+mongoose.connect(`mongodb+srv://${process.env.IDENTIFIANT}:${process.env.PASSWORD}@${process.env.BASE_URL_BDD}/${process.env.DB_NAME}?retryWrites=true&w=majority&appName=ounissa`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => {
     console.log("CONNECTION  reussi a mongoDB");
-}).catch((erreur)=>console.log("Echec de connection a mongoBD",erreur));
+}).catch((erreur) => console.log("Echec de connection a mongoBD", erreur));
 // .catch pour recuperer l'erreur
 
 app.use(bodyparser.json())
 // API 
-app.get("/", (req,res) => {
+app.get("/", (req, res) => {
     res.send('Bienvenue sur le backend de ressource panel.');
 });
 
-app.post("/api/login", login)
+app.post("/api/login", login);
 
+app.post("/api/collaborator/create", createCollaborator);
 
-app.post("/api/collaborator/create", createCollaborator)
+//delete
+app.delete("/api/users/:id", deleteUser);
 
-    
 app.listen(3000, () => {
-  console.log(`Server is listening on port ${3000}`);
+    console.log(`Server is listening on port ${3000}`);
 });

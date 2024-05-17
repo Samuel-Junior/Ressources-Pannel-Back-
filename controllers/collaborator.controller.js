@@ -1,7 +1,7 @@
 import CollaboratorModel from './../models/collaborator.model.js';
 
 
-export const createCollaborator = async(req , res) => {
+export const createCollaborator = async(req, res) => {
 console.log(req.body);
 
 
