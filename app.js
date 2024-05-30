@@ -6,6 +6,7 @@ import 'dotenv/config';
 import { login } from './controllers/login.controller.js';
 import { deleteUser ,updateUser } from './controllers/users.controller.js';
 import { createCollaborator, updateCollaborator, deleteCollaborator } from './controllers/collaborator.controller.js';
+import { createProject, updateProject, deleteProject } from './controllers/project.controller.js';
 
 const app = express();
 
@@ -38,7 +39,12 @@ app.use(bodyParser.json());
 app.get('/', (req, res) => {
     res.send('Bienvenue sur le backend de ressource panel.');
 });
+//
+app.post('/api/project/create', createProject);
+app.put('/api/project/:id', updateProject);
+app.delete('/api/project/:id', deleteProject);
 
+//
 app.post('/api/login', login);
 app.post('/api/collaborator/create', createCollaborator);
 app.put('/api/collaborator/:id', updateCollaborator);
